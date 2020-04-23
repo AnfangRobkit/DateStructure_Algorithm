@@ -210,7 +210,7 @@ template <typename T> int Vector<T>::uniquify(){
 
 以上版本复杂度过高根源在：相邻的相同元素都是一个一个删除的，不是一次性连续删除。
 
-由于有序，每组重复元素都必然前后紧邻集中分布，故可整体删除。
+由于有序，**每组重复元素都必然前后紧邻集中分布，故可整体删除​**。
 
 
 高效版本：
@@ -233,8 +233,16 @@ template <typename T> int Vector<T>::uniquify(){
 
 算法复杂度是 O(n)。
 
-
 ## 有序向量的查找
+
+### 语义约定：
+
+方便后续插入操作：V.insert(1+V.search(e),e) 即便查找失败，也应该使得插入不影响后续的有序性
+
+在有序向量区间V[lo. hi) 中，确定**不大于e的最后一个元素**的秩
+
+- 若e<V[lo]，则返回lo-1
+- 若V[hi-1] <ｅ，则返回ｈi-1 
 
 
 ### 减而治之，二分查找（版本A）
@@ -248,7 +256,7 @@ template <typename T> static Rank binSearch(T* A, T const& e, Rank lo, Rank hi) 
         Rank mi = (lo + hi) >> 1; //以中点为轴点
         if (e < A[mi]) 
             hi = mi; //深入前半段 [lo, mi)继续查找
-        else if ( e > A[mi])
+        else if (A[mi] < e)
             lo = mi + 1; //深入后半段
         else
             return mi; //在 mi 处命中
