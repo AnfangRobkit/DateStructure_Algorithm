@@ -164,3 +164,7 @@ $\left(\begin{array}{c}n+m-a-b \\ n-a\end{array}\right)=\left(\begin{array}{c}n+
 2. 迭代分析
    1. 将所有子问题列成一张表
    2. 颠倒计算方向，从LCS(A[0], B[0])出发，依次计算出所有项
+
+## 递归常见复杂度
+
+![img](img/c1_intro/commom_complexity)
